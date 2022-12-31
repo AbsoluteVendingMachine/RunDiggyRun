@@ -8,7 +8,7 @@ It is made using Godot Game Engine 3.5 with scripting in C# & GDScript.
 | Minimum Requirements | Recommended |
 | -------------------- | ----------- |
 | GPU: Integrated Graphics | GPU: Integrated Graphics |
-| CPU: Any IPU or APU | CPU: Any IPU or APU |
+| CPU: Any processor with integrated graphics| CPU: Any processor with integrated graphics|
 | RAM: 512MB | RAM: 1GB |
 | Storage: 128MB | Storage: 256MB |
 
