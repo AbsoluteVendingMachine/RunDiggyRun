@@ -27,6 +27,7 @@ Go to releases and select the latest archive according to your operating system,
 - Download [.NET Core 3.1 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) and install it if you haven't already
 - Download the Run Diggy, Run! source code
 - Import the Run Diggy, Run! .zip or project.godot file into Godot Game Engine.
+- Finally, go to Editor Settings > Mono > Builds > Build Tool > and set your Build Tool to dotnet CLI
 
 ### After Setup
 
