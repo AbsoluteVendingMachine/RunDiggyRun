@@ -3,6 +3,8 @@
 Run Diggy, Run! is a free and open source game inspired by games like Cave Story and Spelunky.
 It is made using Godot Game Engine 3.5 with scripting in C# & GDScript.
 
+itch.io: https://absolutevendingmachine.itch.io/run-diggy-run
+
 ## Hardware Requirements
 
 | Minimum Requirements | Recommended |
