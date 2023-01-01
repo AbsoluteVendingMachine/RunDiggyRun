@@ -35,3 +35,5 @@ One thing you should know regardless of experience is that for this project I us
 ## Notes
 
 There may be some major bugs because this is my first game I've made that's not a web game in Scratch and I will try to fix them if documented. This game is also not optimized because rather than trying to create an optimal product, I tried to focus on the creative aspect (art, music, etc.) more than optimal code.
+
+If your game is not working properly, to maybe (and unfortunately) fix it you will have to restart the game and reopen the application at the first world and level.
