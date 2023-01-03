@@ -5,6 +5,11 @@ It is made using Godot Game Engine 3.5 with scripting in C# & GDScript.
 
 itch.io: https://absolutevendingmachine.itch.io/run-diggy-run
 
+## Credits
+
+Playtesters & Feedback:
+Hyper Go On!, Kai, Kean, SleepingRaven, WaterNova
+
 ## Hardware Requirements
 
 | Minimum Requirements | Recommended |
