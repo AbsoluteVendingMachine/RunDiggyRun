@@ -1,0 +1,407 @@
+[gd_scene load_steps=43 format=2]
+
+[ext_resource path="res://title_text.tscn" type="PackedScene" id=1]
+[ext_resource path="res://titlekeys.tscn" type="PackedScene" id=2]
+[ext_resource path="res://input_singleton.cs" type="Script" id=3]
+[ext_resource path="res://titlekeys.cs" type="Script" id=4]
+[ext_resource path="res://titlescreen.cs" type="Script" id=5]
+[ext_resource path="res://version.tscn" type="PackedScene" id=6]
+[ext_resource path="res://version.cs" type="Script" id=7]
+[ext_resource path="res://title_text.cs" type="Script" id=8]
+[ext_resource path="res://exit_instructions.tscn" type="PackedScene" id=9]
+[ext_resource path="res://exit_instructions.cs" type="Script" id=10]
+[ext_resource path="res://assets/ingame/splashscreen/background1.png" type="Texture" id=11]
+[ext_resource path="res://background2.cs" type="Script" id=12]
+[ext_resource path="res://assets/ingame/splashscreen/background2.png" type="Texture" id=13]
+[ext_resource path="res://assets/ingame/splashscreen/background3.png" type="Texture" id=14]
+[ext_resource path="res://initial_stg_load2.cs" type="Script" id=23]
+[ext_resource path="res://debug_signal.cs" type="Script" id=25]
+[ext_resource path="res://exit_instruction2.cs" type="Script" id=28]
+[ext_resource path="res://deaths.cs" type="Script" id=29]
+[ext_resource path="res://fullscreen.cs" type="Script" id=30]
+[ext_resource path="res://resolution.cs" type="Script" id=31]
+[ext_resource path="res://exsettings_delay.cs" type="Script" id=32]
+[ext_resource path="res://fps.cs" type="Script" id=33]
+[ext_resource path="res://vsync.cs" type="Script" id=34]
+[ext_resource path="res://settings_node.cs" type="Script" id=35]
+[ext_resource path="res://settings_updater.cs" type="Script" id=37]
+[ext_resource path="res://initial_stg_load.cs" type="Script" id=53]
+[ext_resource path="res://assets/ingame/fonts/BigBlue Terminal 437TT Nerd Font Complete.TTF" type="DynamicFontData" id=54]
+[ext_resource path="res://insettings_delay.cs" type="Script" id=55]
+[ext_resource path="res://resetsettings_func.cs" type="Script" id=56]
+[ext_resource path="res://assets/ingame/splashscreen/rundiggyrunguy.png" type="Texture" id=57]
+
+[sub_resource type="SpriteFrames" id=18]
+animations = [ {
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": false,
+"name": "2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": false,
+"name": "3",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=7]
+size = 24
+font_data = ExtResource( 54 )
+
+[sub_resource type="DynamicFontData" id=10]
+antialiased = false
+font_path = "res://assets/ingame/fonts/BigBlue Terminal 437TT Nerd Font Complete.TTF"
+
+[sub_resource type="DynamicFont" id=11]
+size = 50
+font_data = SubResource( 10 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 41
+font_data = ExtResource( 54 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 21
+font_data = ExtResource( 54 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 21
+font_data = ExtResource( 54 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 41
+font_data = ExtResource( 54 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 41
+font_data = ExtResource( 54 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 41
+font_data = ExtResource( 54 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 41
+font_data = ExtResource( 54 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 41
+font_data = ExtResource( 54 )
+
+[node name="titlescreen" type="CanvasLayer"]
+script = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": "titlescreen base node"
+}
+
+[node name="debug_signal" type="Timer" parent="."]
+autostart = true
+script = ExtResource( 25 )
+__meta__ = {
+"_editor_description_": "debug signal to send stuff about titlekey and settingkey values and whatnot"
+}
+
+[node name="insettings_delay" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+script = ExtResource( 55 )
+__meta__ = {
+"_editor_description_": "small thing to fix my bad coding skills"
+}
+
+[node name="exsettings_delay" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+script = ExtResource( 32 )
+
+[node name="resetsettings_func" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+script = ExtResource( 56 )
+__meta__ = {
+"_editor_description_": "reset settings thingy"
+}
+debug = true
+
+[node name="input_singleton" type="Node" parent="."]
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "send signals for nodes to respond upon input"
+}
+
+[node name="initial_stg_load" type="Node" parent="."]
+script = ExtResource( 53 )
+__meta__ = {
+"_editor_description_": "debugmode 2 is a toggle to check in res:// instead of user://
+load first settings "
+}
+debugmode2 = true
+
+[node name="initial_stg_load2" type="Node" parent="."]
+script = ExtResource( 23 )
+__meta__ = {
+"_editor_description_": "if i added the code from here into the first initial_stg_load it would break so i'm not dealing with that"
+}
+debugmode = true
+
+[node name="settings_updater" type="Node" parent="."]
+script = ExtResource( 37 )
+debug_on = true
+
+[node name="background" type="Sprite" parent="."]
+position = Vector2( 458, 360 )
+scale = Vector2( 2, 2 )
+z_index = -18
+texture = ExtResource( 57 )
+
+[node name="background2" type="AnimatedSprite" parent="."]
+position = Vector2( 640, 360 )
+scale = Vector2( 2, 2 )
+z_index = -982
+frames = SubResource( 18 )
+animation = "3"
+script = ExtResource( 12 )
+
+[node name="version" parent="." instance=ExtResource( 6 )]
+anchor_top = -0.00138889
+anchor_right = 0.0625
+margin_top = 697.0
+margin_right = 592.0
+margin_bottom = 720.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = SubResource( 7 )
+text = "Version: 1.1 (COPYRIGHT AVM 2022)"
+script = ExtResource( 7 )
+
+[node name="title_text" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.018
+margin_left = 536.0
+margin_top = 114.0
+margin_right = 1036.0
+margin_bottom = 219.0
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 11 )
+text = "Run Diggy,
+Run!"
+script = ExtResource( 8 )
+
+[node name="titlekeys" parent="." instance=ExtResource( 2 )]
+margin_left = 664.0
+margin_top = 314.0
+margin_right = 935.0
+margin_bottom = 443.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 14 )
+text = "New Game< Settings< Stats<"
+autowrap = true
+script = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": "title sprites"
+}
+
+[node name="exit_instructions" parent="." instance=ExtResource( 9 )]
+visible = false
+margin_left = 2.0
+margin_top = 121.0
+margin_right = 322.0
+margin_bottom = 601.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 12 )
+text = "To go back:
+X on Keyboard
+O on Playstation
+B on Xbox
+A on Nintendo
+
+Press Z to make
+changes to
+selected setting
+
+Press Control to
+reset settings 
+on keyboard
+
+Press R-Stick to
+reset settings on
+controller
+
+Settings are
+saved when going
+back to title"
+script = ExtResource( 10 )
+
+[node name="exit_instruction2" type="Label" parent="."]
+visible = false
+margin_left = 12.0
+margin_top = 305.0
+margin_right = 312.0
+margin_bottom = 426.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+custom_fonts/font = SubResource( 8 )
+text = "To go back:
+X on Keyboard
+O on Playstation
+B on Xbox
+A on Nintendo"
+align = 1
+script = ExtResource( 28 )
+
+[node name="settings_node" type="Node" parent="."]
+script = ExtResource( 35 )
+__meta__ = {
+"_editor_description_": "kind of like a grouped singleton thing for settings"
+}
+debugmode = true
+
+[node name="resolution" type="Label" parent="settings_node"]
+visible = false
+margin_left = 664.0
+margin_top = 314.0
+margin_right = 1171.0
+margin_bottom = 355.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 13 )
+text = "Resolution: Example"
+script = ExtResource( 31 )
+debugmode_on = true
+
+[node name="fullscreen" type="Label" parent="settings_node"]
+visible = false
+margin_left = 664.0
+margin_top = 358.0
+margin_right = 1150.0
+margin_bottom = 399.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 15 )
+text = "Fullscreen: On/Off"
+script = ExtResource( 30 )
+debugmode_on = true
+
+[node name="fps" type="Label" parent="settings_node"]
+visible = false
+margin_left = 664.0
+margin_top = 402.0
+margin_right = 988.0
+margin_bottom = 443.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 16 )
+text = "FPS: Example"
+script = ExtResource( 33 )
+debugmode_on = true
+
+[node name="vsync" type="Label" parent="settings_node"]
+visible = false
+margin_left = 665.0
+margin_top = 446.0
+margin_right = 1127.0
+margin_bottom = 496.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 17 )
+text = "VSync: Example"
+script = ExtResource( 34 )
+debugmode_on = true
+
+[node name="stats_node" type="Node" parent="."]
+
+[node name="deaths" type="Label" parent="stats_node"]
+visible = false
+margin_left = 664.0
+margin_top = 358.0
+margin_right = 1096.0
+margin_bottom = 399.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 4
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 9 )
+text = "Deaths: Variable"
+script = ExtResource( 29 )
+debug = true
+
+[node name="sfx" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+
+[connection signal="timeout" from="debug_signal" to="settings_node" method="_on_debug_signal_timeout"]
+[connection signal="timeout" from="debug_signal" to="settings_node/resolution" method="_on_debug_signal_timeout"]
+[connection signal="timeout" from="insettings_delay" to="settings_node/resolution" method="_on_insettings_delay_timeout"]
+[connection signal="timeout" from="exsettings_delay" to="settings_node" method="_on_exsettings_delay_timeout"]
+[connection signal="timeout" from="resetsettings_func" to="settings_node/resolution" method="_on_resetsettings_func_timeout"]
+[connection signal="timeout" from="resetsettings_func" to="settings_node/fullscreen" method="_on_resetsettings_func_timeout"]
+[connection signal="timeout" from="resetsettings_func" to="settings_node/fps" method="_on_resetsettings_func_timeout"]
+[connection signal="timeout" from="resetsettings_func" to="settings_node/vsync" method="_on_resetsettings_func_timeout"]
+[connection signal="settingsreset" from="input_singleton" to="resetsettings_func" method="_on_input_singleton_settingsreset"]
+[connection signal="titleback" from="input_singleton" to="title_text" method="_on_input_singleton_titleback"]
+[connection signal="titleback" from="input_singleton" to="titlekeys" method="_on_input_singleton_titleback"]
+[connection signal="titleback" from="input_singleton" to="exit_instructions" method="_on_input_singleton_titleback"]
+[connection signal="titleback" from="input_singleton" to="exit_instruction2" method="_on_input_singleton_titleback"]
+[connection signal="titleback" from="input_singleton" to="settings_node" method="_on_input_singleton_titleback"]
+[connection signal="titleback" from="input_singleton" to="stats_node/deaths" method="_on_input_singleton_titleback"]
+[connection signal="titlecont" from="input_singleton" to="titlekeys" method="_on_input_singleton_titlecont"]
+[connection signal="titlecont" from="input_singleton" to="settings_node/resolution" method="_on_input_singleton_titlecont"]
+[connection signal="titlecont" from="input_singleton" to="settings_node/fullscreen" method="_on_input_singleton_titlecont"]
+[connection signal="titlecont" from="input_singleton" to="settings_node/fps" method="_on_input_singleton_titlecont"]
+[connection signal="titlecont" from="input_singleton" to="settings_node/vsync" method="_on_input_singleton_titlecont"]
+[connection signal="titledown" from="input_singleton" to="titlekeys" method="_on_input_singleton_titledown"]
+[connection signal="titledown" from="input_singleton" to="settings_node" method="_on_input_singleton_titledown"]
+[connection signal="titleup" from="input_singleton" to="titlekeys" method="_on_input_singleton_titleup"]
+[connection signal="titleup" from="input_singleton" to="settings_node" method="_on_input_singleton_titleup"]
+[connection signal="enter_intro" from="titlekeys" to="." method="_on_titlekeys_enter_intro"]
+[connection signal="enter_intro" from="titlekeys" to="debug_signal" method="_on_titlekeys_enter_intro"]
+[connection signal="enter_intro" from="titlekeys" to="input_singleton" method="_on_titlekeys_enter_intro"]
+[connection signal="enter_intro" from="titlekeys" to="version" method="_on_titlekeys_enter_intro"]
+[connection signal="enter_intro" from="titlekeys" to="title_text" method="_on_titlekeys_enter_intro"]
+[connection signal="enter_intro" from="titlekeys" to="exit_instructions" method="_on_titlekeys_enter_intro"]
+[connection signal="enter_intro" from="titlekeys" to="settings_node" method="_on_titlekeys_enter_intro"]
+[connection signal="enter_settings" from="titlekeys" to="resetsettings_func" method="_on_titlekeys_enter_settings"]
+[connection signal="enter_settings" from="titlekeys" to="title_text" method="_on_titlekeys_enter_settings"]
+[connection signal="enter_settings" from="titlekeys" to="exit_instructions" method="_on_titlekeys_enter_settings"]
+[connection signal="enter_settings" from="titlekeys" to="settings_node" method="_on_titlekeys_enter_settings"]
+[connection signal="enter_settings" from="titlekeys" to="settings_node/resolution" method="_on_titlekeys_enter_settings"]
+[connection signal="enter_settings" from="titlekeys" to="settings_node/fullscreen" method="_on_titlekeys_enter_settings"]
+[connection signal="enter_settings" from="titlekeys" to="settings_node/fps" method="_on_titlekeys_enter_settings"]
+[connection signal="enter_settings" from="titlekeys" to="settings_node/vsync" method="_on_titlekeys_enter_settings"]
+[connection signal="enter_stats" from="titlekeys" to="title_text" method="_on_titlekeys_enter_stats"]
+[connection signal="enter_stats" from="titlekeys" to="exit_instruction2" method="_on_titlekeys_enter_stats"]
+[connection signal="enter_stats" from="titlekeys" to="stats_node/deaths" method="_on_titlekeys_enter_stats"]
+[connection signal="debugmode_on" from="settings_node" to="settings_node/resolution" method="_on_settings_node_debugmode_on"]
+[connection signal="debugmode_on" from="settings_node" to="settings_node/fullscreen" method="_on_settings_node_debugmode_on"]
+[connection signal="debugmode_on" from="settings_node" to="settings_node/fps" method="_on_settings_node_debugmode_on"]
+[connection signal="debugmode_on" from="settings_node" to="settings_node/vsync" method="_on_settings_node_debugmode_on"]
+[connection signal="returntitle" from="settings_node" to="resetsettings_func" method="_on_settings_node_returntitle"]
+[connection signal="returntitle" from="settings_node" to="settings_updater" method="_on_settings_node_returntitle"]
+[connection signal="returntitle" from="settings_node" to="settings_node/resolution" method="_on_settings_node_returntitle"]
+[connection signal="sprite1" from="settings_node" to="settings_node/resolution" method="_on_settings_node_sprite1"]
+[connection signal="sprite1" from="settings_node" to="settings_node/fullscreen" method="_on_settings_node_sprite1"]
+[connection signal="sprite2" from="settings_node" to="settings_node/resolution" method="_on_settings_node_sprite2"]
+[connection signal="sprite2" from="settings_node" to="settings_node/fullscreen" method="_on_settings_node_sprite2"]
+[connection signal="sprite2" from="settings_node" to="settings_node/fps" method="_on_settings_node_sprite2"]
+[connection signal="sprite3" from="settings_node" to="settings_node/fullscreen" method="_on_settings_node_sprite3"]
+[connection signal="sprite3" from="settings_node" to="settings_node/fps" method="_on_settings_node_sprite3"]
+[connection signal="sprite3" from="settings_node" to="settings_node/vsync" method="_on_settings_node_sprite3"]
+[connection signal="sprite4" from="settings_node" to="settings_node/fps" method="_on_settings_node_sprite4"]
+[connection signal="sprite4" from="settings_node" to="settings_node/vsync" method="_on_settings_node_sprite4"]
+[connection signal="insettingsdelay" from="settings_node/resolution" to="insettings_delay" method="_on_resolution_insettingsdelay"]
+[connection signal="set_settings_1" from="settings_node/resolution" to="settings_node/fullscreen" method="_on_resolution_set_settings_1"]
+[connection signal="set_settings_2" from="settings_node/fullscreen" to="settings_node/fps" method="_on_fullscreen_set_settings_2"]
+[connection signal="set_settings_3" from="settings_node/fps" to="settings_node/vsync" method="_on_fps_set_settings_3"]

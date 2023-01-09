@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://player.cs" type="Script" id=15]
+
+[node name="player" type="KinematicBody2D"]
+motion/sync_to_physics = true
+script = ExtResource( 15 )

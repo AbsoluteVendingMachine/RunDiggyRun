@@ -1,0 +1,100 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/ingame/object_sprites/bush/bush2.png" type="Texture" id=1]
+[ext_resource path="res://assets/ingame/object_sprites/bush/bush3.png" type="Texture" id=2]
+[ext_resource path="res://assets/ingame/object_sprites/bush/bush1.png" type="Texture" id=3]
+[ext_resource path="res://assets/ingame/object_sprites/bush/proj1.png" type="Texture" id=4]
+[ext_resource path="res://assets/ingame/object_sprites/bush/proj2.png" type="Texture" id=5]
+[ext_resource path="res://bush.gd" type="Script" id=6]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "awake",
+"speed": 2.5
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "idle",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 24, 23.5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 3.5, 4.5 )
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "anim",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 2.5, 2.5 )
+
+[sub_resource type="CircleShape2D" id=5]
+
+[node name="bush" type="KinematicBody2D"]
+script = ExtResource( 6 )
+
+[node name="animation" type="AnimatedSprite" parent="."]
+frames = SubResource( 2 )
+animation = "awake"
+frame = 2
+
+[node name="parameter" type="Area2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="parameter"]
+position = Vector2( -24, -18.5 )
+shape = SubResource( 3 )
+
+[node name="collision" type="Area2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="collision"]
+position = Vector2( -0.5, 0.5 )
+shape = SubResource( 4 )
+
+[node name="sfx" type="AudioStreamPlayer" parent="."]
+
+[node name="template" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+disabled = true
+
+[node name="projectile" type="KinematicBody2D" parent="."]
+position = Vector2( -10, 0 )
+z_index = -1
+
+[node name="animation" type="AnimatedSprite" parent="projectile"]
+frames = SubResource( 6 )
+animation = "anim"
+frame = 1
+
+[node name="collision2" type="Area2D" parent="projectile"]
+
+[node name="shape2" type="CollisionShape2D" parent="projectile/collision2"]
+position = Vector2( -0.5, -0.5 )
+shape = SubResource( 7 )
+
+[node name="template" type="CollisionShape2D" parent="projectile"]
+visible = false
+shape = SubResource( 5 )
+disabled = true
+
+[node name="lifespan" type="Timer" parent="projectile"]
+wait_time = 0.4
+
+[node name="cooldown_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="parameter" to="." method="_on_parameter_area_entered"]
+[connection signal="area_entered" from="collision" to="." method="_on_collision_area_entered"]
+[connection signal="area_entered" from="projectile/collision2" to="." method="_on_collision2_area_entered"]
+[connection signal="timeout" from="cooldown_timer" to="." method="_on_cooldown_timer_timeout"]

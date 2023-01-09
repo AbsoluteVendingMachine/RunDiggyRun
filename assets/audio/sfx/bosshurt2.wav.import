@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bosshurt2.wav-68fdffd1c754fb4d144ba498a5372ccd.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/bosshurt2.wav"
+dest_files=[ "res://.import/bosshurt2.wav-68fdffd1c754fb4d144ba498a5372ccd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

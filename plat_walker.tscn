@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/ingame/object_sprites/plat_walker/platwalker1.png" type="Texture" id=1]
+[ext_resource path="res://assets/ingame/object_sprites/plat_walker/platwalker2.png" type="Texture" id=2]
+[ext_resource path="res://plat_walker.gd" type="Script" id=3]
+[ext_resource path="res://assets/ingame/object_sprites/plat_walker/platform.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "anim",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 2.5, 6.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 24, 2 )
+
+[sub_resource type="CapsuleShape2D" id=4]
+
+[node name="plat_walker" type="KinematicBody2D"]
+script = ExtResource( 3 )
+
+[node name="animation" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "anim"
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="hitbox"]
+position = Vector2( 0.5, 9.5 )
+shape = SubResource( 2 )
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="."]
+
+[node name="switch" type="Timer" parent="."]
+
+[node name="platform" type="KinematicBody2D" parent="."]
+
+[node name="platform_sprite" type="Sprite" parent="platform"]
+position = Vector2( 0, -2 )
+texture = ExtResource( 4 )
+
+[node name="platform" type="CollisionShape2D" parent="platform"]
+position = Vector2( 0, -3 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 4 )
+disabled = true
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="switch" to="." method="_on_switch_timeout"]

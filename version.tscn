@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/ingame/fonts/diggygame-font.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+extra_spacing_char = 1
+font_data = ExtResource( 1 )
+
+[node name="version" type="Label"]
+margin_right = 329.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 1 )
+text = "version: build.2_alpha (copyright avm 2022)"
+__meta__ = {
+"_edit_use_anchors_": true
+}

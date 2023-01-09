@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/ingame/object_sprites/super_pickaxe/pickaxe_1.png" type="Texture" id=1]
+[ext_resource path="res://assets/ingame/object_sprites/super_pickaxe/pickaxe_2.png" type="Texture" id=2]
+[ext_resource path="res://assets/ingame/object_sprites/super_pickaxe/pickaxe_3.png" type="Texture" id=3]
+[ext_resource path="res://assets/ingame/object_sprites/super_pickaxe/pickaxe_4.png" type="Texture" id=4]
+[ext_resource path="res://superpickaxe.gd" type="Script" id=5]
+
+[sub_resource type="SpriteFrames" id=51]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "anim",
+"speed": 20.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=52]
+
+[sub_resource type="RectangleShape2D" id=53]
+
+[node name="super_pick" type="KinematicBody2D" groups=["weapons"]]
+position = Vector2( -1657, 739 )
+scale = Vector2( 0.4, 0.4 )
+z_index = 1
+script = ExtResource( 5 )
+
+[node name="pickaxe_anim" type="AnimatedSprite" parent="."]
+scale = Vector2( 3, 3 )
+frames = SubResource( 51 )
+animation = "anim"
+frame = 3
+
+[node name="pickaxe_col" type="CollisionShape2D" parent="."]
+shape = SubResource( 52 )
+disabled = true
+
+[node name="cooldown_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="teleport_timer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="pickaxearea" type="Area2D" parent="."]
+
+[node name="pickaxe_col2" type="CollisionShape2D" parent="pickaxearea"]
+position = Vector2( 0, 0.000244141 )
+shape = SubResource( 53 )
