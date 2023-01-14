@@ -1,4 +1,4 @@
-[gd_scene load_steps=404 format=2]
+[gd_scene load_steps=433 format=2]
 
 [ext_resource path="res://titlescreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ingame/splashscreen/intro.png" type="Texture" id=2]
@@ -222,6 +222,52 @@
 [ext_resource path="res://assets/ingame/splashscreen/ending1.png" type="Texture" id=220]
 [ext_resource path="res://assets/ingame/splashscreen/ending4.png" type="Texture" id=221]
 [ext_resource path="res://end_image.gd" type="Script" id=222]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/left-press.png" type="Texture" id=223]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/left-unpress.png" type="Texture" id=224]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/right-press.png" type="Texture" id=225]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/right-unpress.png" type="Texture" id=226]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/attack-unpress.png" type="Texture" id=227]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/attack-press.png" type="Texture" id=228]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/attackup-unpress.png" type="Texture" id=229]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/attackup-press.png" type="Texture" id=230]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/attackdown-press.png" type="Texture" id=231]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/attackdown-unpress.png" type="Texture" id=232]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/jump_press.png" type="Texture" id=235]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/jump_unpress.png" type="Texture" id=236]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/toggle-press.png" type="Texture" id=237]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/toggle-unpress.png" type="Texture" id=238]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/restart-press.png" type="Texture" id=239]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/restart-unpress.png" type="Texture" id=240]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/next_press.png" type="Texture" id=241]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/next_unpress.png" type="Texture" id=242]
+[ext_resource path="res://mobile_controls.cs" type="Script" id=243]
+[ext_resource path="res://next.cs" type="Script" id=244]
+
+[sub_resource type="RectangleShape2D" id=191]
+extents = Vector2( 9, 9 )
+
+[sub_resource type="RectangleShape2D" id=192]
+extents = Vector2( 9, 9 )
+
+[sub_resource type="RectangleShape2D" id=193]
+extents = Vector2( 8, 6 )
+
+[sub_resource type="RectangleShape2D" id=194]
+extents = Vector2( 8, 6 )
+
+[sub_resource type="RectangleShape2D" id=195]
+extents = Vector2( 8, 6 )
+
+[sub_resource type="RectangleShape2D" id=197]
+extents = Vector2( 9, 9 )
+
+[sub_resource type="RectangleShape2D" id=198]
+extents = Vector2( 9, 9 )
+
+[sub_resource type="RectangleShape2D" id=199]
+extents = Vector2( 7, 6 )
+
+[sub_resource type="RectangleShape2D" id=200]
 
 [sub_resource type="SpriteFrames" id=82]
 animations = [ {
@@ -624,7 +670,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.13 ),
+"times": PoolRealArray( 0, 0.126521 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 9, 5 ]
@@ -725,7 +771,7 @@ nodes/swing2/node = SubResource( 50 )
 nodes/swing2/position = Vector2( 400, 320 )
 nodes/upswing/node = SubResource( 48 )
 nodes/upswing/position = Vector2( 180, 400 )
-node_connections = [ "swing2", 0, "swing", "swing2", 1, "upswing", "swing2", 2, "downswing", "end_state", 0, "movement", "end_state", 1, "jump", "end_state", 2, "lunge_", "end_state", 3, "damage", "end_state", 4, "swing2", "output", 0, "end_state", "movement", 0, "idle", "movement", 1, "run" ]
+node_connections = [ "output", 0, "end_state", "movement", 0, "idle", "movement", 1, "run", "end_state", 0, "movement", "end_state", 1, "jump", "end_state", 2, "lunge_", "end_state", 3, "damage", "end_state", 4, "swing2", "swing2", 0, "swing", "swing2", 1, "upswing", "swing2", 2, "downswing" ]
 
 [sub_resource type="RectangleShape2D" id=60]
 extents = Vector2( 10, 13.75 )
@@ -2804,6 +2850,82 @@ wait_time = 0.2
 autostart = true
 script = ExtResource( 14 )
 
+[node name="mobile_controls" type="CanvasLayer" parent="."]
+layer = 128
+script = ExtResource( 243 )
+
+[node name="left" type="TouchScreenButton" parent="mobile_controls"]
+modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 77, 584 )
+scale = Vector2( 8, 8 )
+z_index = 4096
+normal = ExtResource( 224 )
+pressed = ExtResource( 223 )
+shape = SubResource( 191 )
+
+[node name="right" type="TouchScreenButton" parent="mobile_controls"]
+modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 238, 584 )
+scale = Vector2( 8, 8 )
+z_index = 4096
+normal = ExtResource( 226 )
+pressed = ExtResource( 225 )
+shape = SubResource( 192 )
+
+[node name="attack" type="TouchScreenButton" parent="mobile_controls"]
+modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 928, 507 )
+scale = Vector2( 8, 8 )
+z_index = 4096
+normal = ExtResource( 227 )
+pressed = ExtResource( 228 )
+shape = SubResource( 193 )
+
+[node name="attack_up" type="TouchScreenButton" parent="mobile_controls"]
+modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 928, 408 )
+scale = Vector2( 8, 8 )
+z_index = 4096
+normal = ExtResource( 229 )
+pressed = ExtResource( 230 )
+shape = SubResource( 194 )
+
+[node name="attack_down" type="TouchScreenButton" parent="mobile_controls"]
+modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 928, 607 )
+scale = Vector2( 8, 8 )
+z_index = 4096
+normal = ExtResource( 232 )
+pressed = ExtResource( 231 )
+shape = SubResource( 195 )
+
+[node name="jump" type="TouchScreenButton" parent="mobile_controls"]
+modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 786, 584 )
+scale = Vector2( 8, 8 )
+z_index = 4096
+normal = ExtResource( 236 )
+pressed = ExtResource( 235 )
+shape = SubResource( 197 )
+
+[node name="toggle" type="TouchScreenButton" parent="mobile_controls"]
+modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 1069, 584 )
+scale = Vector2( 8, 8 )
+z_index = 4096
+normal = ExtResource( 238 )
+pressed = ExtResource( 237 )
+shape = SubResource( 198 )
+
+[node name="restart" type="TouchScreenButton" parent="mobile_controls"]
+modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 1156, 85 )
+scale = Vector2( 8, 8 )
+z_index = 4096
+normal = ExtResource( 240 )
+pressed = ExtResource( 239 )
+shape = SubResource( 199 )
+
 [node name="intro" type="Node" parent="."]
 
 [node name="cont_singleton" type="Node" parent="intro"]
@@ -2822,6 +2944,16 @@ position = Vector2( 640, 360 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 5 )
 script = ExtResource( 6 )
+
+[node name="next" type="TouchScreenButton" parent="intro"]
+modulate = Color( 1, 1, 1, 0.901961 )
+position = Vector2( 522, 545 )
+scale = Vector2( 12.3125, 12.3125 )
+z_index = 614
+normal = ExtResource( 242 )
+pressed = ExtResource( 241 )
+shape = SubResource( 200 )
+script = ExtResource( 244 )
 
 [node name="titlescreen" parent="." instance=ExtResource( 1 )]
 visible = false
@@ -2982,8 +3114,8 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
 custom_fonts/font = SubResource( 72 )
-text = "R To Restart Or
-Start To Restart"
+text = "Press The Restart
+Button To Restart"
 align = 1
 
 [node name="health" type="AnimatedSprite" parent="game_scene/player/player_cam/hud"]
@@ -3099,7 +3231,7 @@ scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 15 )
 hframes = 7
 vframes = 2
-frame = 9
+frame = 2
 region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="jetpack" type="AnimatedSprite" parent="game_scene/player/player_anim"]
@@ -4195,9 +4327,29 @@ script = ExtResource( 51 )
 [connection signal="timeout" from="debug_timer" to="game_scene/player" method="_on_debug_timer_timeout"]
 [connection signal="timeout" from="debug_timer" to="game_scene/player/player_anim_tree" method="_on_debug_timer_timeout"]
 [connection signal="timeout" from="debug_timer" to="game_scene/superpickaxe" method="_on_debug_timer_timeout"]
+[connection signal="released" from="mobile_controls/attack" to="game_scene/player" method="_on_attack_released"]
+[connection signal="released" from="mobile_controls/attack" to="game_scene/player/player_anim_tree" method="_on_attack_released"]
+[connection signal="released" from="mobile_controls/attack" to="game_scene/pickaxe" method="_on_attack_released"]
+[connection signal="released" from="mobile_controls/attack" to="game_scene/superpickaxe" method="_on_attack_released"]
+[connection signal="released" from="mobile_controls/attack" to="game_scene/shotgun" method="_on_attack_released"]
+[connection signal="released" from="mobile_controls/attack_up" to="game_scene/player" method="_on_attack_up_released"]
+[connection signal="released" from="mobile_controls/attack_up" to="game_scene/player/player_anim_tree" method="_on_attack_up_released"]
+[connection signal="released" from="mobile_controls/attack_up" to="game_scene/pickaxe" method="_on_attack_up_released"]
+[connection signal="released" from="mobile_controls/attack_up" to="game_scene/superpickaxe" method="_on_attack_up_released"]
+[connection signal="released" from="mobile_controls/attack_up" to="game_scene/shotgun" method="_on_attack_up_released"]
+[connection signal="released" from="mobile_controls/attack_down" to="game_scene/player" method="_on_attack_down_released"]
+[connection signal="released" from="mobile_controls/attack_down" to="game_scene/player/player_anim_tree" method="_on_attack_down_released"]
+[connection signal="released" from="mobile_controls/attack_down" to="game_scene/pickaxe" method="_on_attack_down_released"]
+[connection signal="released" from="mobile_controls/attack_down" to="game_scene/superpickaxe" method="_on_attack_down_released"]
+[connection signal="released" from="mobile_controls/attack_down" to="game_scene/shotgun" method="_on_attack_down_released"]
+[connection signal="released" from="mobile_controls/jump" to="game_scene/player" method="_on_jump_released"]
+[connection signal="released" from="mobile_controls/toggle" to="game_scene/toggle_singleton" method="_on_toggle_released"]
+[connection signal="released" from="mobile_controls/restart" to="game_scene/player/player_cam/hud/restart_house/restart" method="_on_restart_released"]
 [connection signal="any_button" from="intro/cont_singleton" to="intro/intro_sprite" method="_on_cont_singleton_any_button"]
 [connection signal="any_button" from="intro/cont_singleton" to="intro/controls_sprite" method="_on_cont_singleton_any_button"]
+[connection signal="game_start" from="intro/controls_sprite" to="mobile_controls" method="_on_controls_sprite_game_start"]
 [connection signal="game_start" from="intro/controls_sprite" to="intro/cont_singleton" method="_on_controls_sprite_game_start"]
+[connection signal="game_start" from="intro/controls_sprite" to="intro/next" method="_on_controls_sprite_game_start"]
 [connection signal="game_start" from="intro/controls_sprite" to="game_scene/player" method="_on_controls_sprite_game_start"]
 [connection signal="game_start" from="intro/controls_sprite" to="game_scene/player/player_cam/extra_hud" method="_on_controls_sprite_game_start"]
 [connection signal="game_start" from="intro/controls_sprite" to="game_scene/player/player_cam/hud" method="_on_controls_sprite_game_start"]
@@ -4224,6 +4376,7 @@ script = ExtResource( 51 )
 [connection signal="game_start" from="intro/controls_sprite" to="game_scene/shotgun" method="_on_controls_sprite_game_start"]
 [connection signal="game_start" from="intro/controls_sprite" to="game_scene/progress_point" method="_on_controls_sprite_game_start"]
 [connection signal="game_start" from="intro/controls_sprite" to="music" method="_on_controls_sprite_game_start"]
+[connection signal="released" from="intro/next" to="intro/cont_singleton" method="_on_next_released"]
 [connection signal="do_intro" from="titlescreen" to="intro/cont_singleton" method="_on_titlescreen_do_intro"]
 [connection signal="do_intro" from="titlescreen" to="intro/intro_sprite" method="_on_titlescreen_do_intro"]
 [connection signal="action" from="game_scene/player" to="game_scene/player/player_anim_tree" method="_on_player_action"]
@@ -4232,6 +4385,7 @@ script = ExtResource( 51 )
 [connection signal="causeOfDeath1" from="game_scene/player" to="timers/hurt_timer" method="_on_player_causeOfDeath1"]
 [connection signal="damage_received" from="game_scene/player" to="timers/hurt_timer" method="_on_player_damage_received"]
 [connection signal="death" from="game_scene/player" to="game_scene/player/player_cam/hud/death_screen" method="_on_player_death"]
+[connection signal="death" from="game_scene/player" to="game_scene/player/player_cam/hud/restart_house/restart" method="_on_player_death"]
 [connection signal="death" from="game_scene/player" to="game_scene/player/player_cam/onscreen_timer/ingame_timer" method="_on_player_death"]
 [connection signal="death" from="game_scene/player" to="game_scene/player/player_cam/onscreen_timer/level_timer" method="_on_player_death"]
 [connection signal="death" from="game_scene/player" to="game_scene/pickaxe" method="_on_player_death"]
@@ -4282,6 +4436,7 @@ script = ExtResource( 51 )
 [connection signal="restart_game" from="game_scene/player/player_cam/hud/restart_house/restart" to="game_scene/player/light_circle" method="_on_restart_restart_game"]
 [connection signal="restart_game" from="game_scene/player/player_cam/hud/restart_house/restart" to="game_scene/player/player_cam/hud" method="_on_restart_restart_game"]
 [connection signal="restart_game" from="game_scene/player/player_cam/hud/restart_house/restart" to="game_scene/player/player_cam/hud/level" method="_on_restart_restart_game"]
+[connection signal="restart_game" from="game_scene/player/player_cam/hud/restart_house/restart" to="game_scene/player/player_cam/hud/death_screen" method="_on_restart_restart_game"]
 [connection signal="restart_game" from="game_scene/player/player_cam/hud/restart_house/restart" to="game_scene/player/player_cam/hud/health" method="_on_restart_restart_game"]
 [connection signal="restart_game" from="game_scene/player/player_cam/hud/restart_house/restart" to="game_scene/player/player_cam/hud/slot_1" method="_on_restart_restart_game"]
 [connection signal="restart_game" from="game_scene/player/player_cam/hud/restart_house/restart" to="game_scene/player/player_cam/hud/slot_2" method="_on_restart_restart_game"]
@@ -4539,6 +4694,7 @@ script = ExtResource( 51 )
 [connection signal="finalBossDamage" from="game_scene/world3_3/final_boss" to="timers/hurt_timer" method="_on_final_boss_finalBossDamage"]
 [connection signal="finalBossHit" from="game_scene/world3_3/final_boss" to="game_scene/pickaxe" method="_on_final_boss_finalBossHit"]
 [connection signal="finalBossHit" from="game_scene/world3_3/final_boss" to="game_scene/pickaxe_particles" method="_on_final_boss_finalBossHit"]
+[connection signal="killAll" from="game_scene/world3_3/final_boss" to="mobile_controls" method="_on_final_boss_killAll"]
 [connection signal="killAll" from="game_scene/world3_3/final_boss" to="game_scene" method="_on_final_boss_killAll"]
 [connection signal="killAll" from="game_scene/world3_3/final_boss" to="game_scene/player" method="_on_final_boss_killAll"]
 [connection signal="killAll" from="game_scene/world3_3/final_boss" to="game_scene/player/light_circle" method="_on_final_boss_killAll"]

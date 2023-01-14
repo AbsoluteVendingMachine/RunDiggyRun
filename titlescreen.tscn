@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://title_text.tscn" type="PackedScene" id=1]
 [ext_resource path="res://titlekeys.tscn" type="PackedScene" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://background2.cs" type="Script" id=12]
 [ext_resource path="res://assets/ingame/splashscreen/background2.png" type="Texture" id=13]
 [ext_resource path="res://assets/ingame/splashscreen/background3.png" type="Texture" id=14]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/play_press.png" type="Texture" id=15]
+[ext_resource path="res://assets/ingame/object_sprites/mobile/play_unpress.png" type="Texture" id=16]
 [ext_resource path="res://initial_stg_load2.cs" type="Script" id=23]
 [ext_resource path="res://debug_signal.cs" type="Script" id=25]
 [ext_resource path="res://exit_instruction2.cs" type="Script" id=28]
@@ -92,6 +94,8 @@ font_data = ExtResource( 54 )
 [sub_resource type="DynamicFont" id=9]
 size = 41
 font_data = ExtResource( 54 )
+
+[sub_resource type="RectangleShape2D" id=19]
 
 [node name="titlescreen" type="CanvasLayer"]
 script = ExtResource( 5 )
@@ -195,14 +199,14 @@ script = ExtResource( 8 )
 
 [node name="titlekeys" parent="." instance=ExtResource( 2 )]
 margin_left = 664.0
-margin_top = 314.0
-margin_right = 935.0
-margin_bottom = 443.0
+margin_top = 321.0
+margin_right = 913.0
+margin_bottom = 453.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
 custom_fonts/font = SubResource( 14 )
-text = "New Game< Settings< Stats<"
+text = "New Game< Deaths:  "
 autowrap = true
 script = ExtResource( 4 )
 __meta__ = {
@@ -326,11 +330,10 @@ debugmode_on = true
 [node name="stats_node" type="Node" parent="."]
 
 [node name="deaths" type="Label" parent="stats_node"]
-visible = false
 margin_left = 664.0
-margin_top = 358.0
+margin_top = 366.0
 margin_right = 1096.0
-margin_bottom = 399.0
+margin_bottom = 408.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 4
@@ -341,6 +344,15 @@ debug = true
 
 [node name="sfx" type="AudioStreamPlayer" parent="."]
 volume_db = -5.0
+
+[node name="start_game" type="TouchScreenButton" parent="."]
+modulate = Color( 1, 1, 1, 0.901961 )
+position = Vector2( 659, 428 )
+scale = Vector2( 15, 15 )
+normal = ExtResource( 16 )
+pressed = ExtResource( 15 )
+shape = SubResource( 19 )
+shape_visible = false
 
 [connection signal="timeout" from="debug_signal" to="settings_node" method="_on_debug_signal_timeout"]
 [connection signal="timeout" from="debug_signal" to="settings_node/resolution" method="_on_debug_signal_timeout"]
@@ -405,3 +417,4 @@ volume_db = -5.0
 [connection signal="set_settings_1" from="settings_node/resolution" to="settings_node/fullscreen" method="_on_resolution_set_settings_1"]
 [connection signal="set_settings_2" from="settings_node/fullscreen" to="settings_node/fps" method="_on_fullscreen_set_settings_2"]
 [connection signal="set_settings_3" from="settings_node/fps" to="settings_node/vsync" method="_on_fps_set_settings_3"]
+[connection signal="pressed" from="start_game" to="input_singleton" method="_on_start_game_pressed"]

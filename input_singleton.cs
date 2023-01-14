@@ -36,6 +36,14 @@ public class input_singleton : Node
         cangoback = false;
     }
 
+    public void _on_start_game_pressed(){
+        EmitSignal("titlecont");
+        iskeypressed = true;
+        var sfx = GetNode<AudioStreamPlayer>("/root/game/titlescreen/sfx");
+        sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/toggle.wav");
+        sfx.Play();
+    }
+
      public override void _Process(float delta)
 
     {
@@ -56,61 +64,13 @@ public class input_singleton : Node
 
     }
 
-    if (Input.IsActionPressed("up_title"))
-
-    {
-
-    var sfx = GetNode<AudioStreamPlayer>("/root/game/titlescreen/sfx");
-    sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/toggle.wav");
-    sfx.Play();
-    EmitSignal(nameof(titleup));
-    iskeypressed = true;
-
-    }
-
-    if (Input.IsActionPressed("down_title"))
-
-    {
-
-    var sfx = GetNode<AudioStreamPlayer>("/root/game/titlescreen/sfx");
-    sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/toggle.wav");
-    sfx.Play();
-    EmitSignal(nameof(titledown));
-    iskeypressed = true;
-
-    }
-
-    if (Input.IsActionPressed("title_back"))
-
-    {
-
-    var sfx = GetNode<AudioStreamPlayer>("/root/game/titlescreen/sfx");
-    sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/toggle.wav");
-    sfx.Play();
-    EmitSignal(nameof(titleback));
-    iskeypressed = true;
-
-    }
-
-    if ((Input.IsActionPressed("resetsettingskb1")) || (Input.IsActionPressed("resetsettingscontroller")))
-
-    {
-
-    var sfx = GetNode<AudioStreamPlayer>("/root/game/titlescreen/sfx");
-    sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/toggle.wav");
-    sfx.Play();
-    EmitSignal(nameof(settingsreset));
-    iskeypressed = true;
-
-    }
-
     }
 
     else if (iskeypressed == true)
 
     {
 
-    if ((!Input.IsActionPressed("title_cont")) && (!Input.IsActionPressed("up_title")) && (!Input.IsActionPressed("down_title")) && (!Input.IsActionPressed("title_back")) && (!Input.IsActionPressed("resetsettingskb1")) && (!Input.IsActionPressed("resetsettingscontroller")))
+    if (!Input.IsActionPressed("title_cont"))
 
     {
 

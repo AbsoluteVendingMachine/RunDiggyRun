@@ -18,6 +18,10 @@ public class cont_singleton : Node
         in_intro = true;
     }
 
+    public void _on_next_released(){
+        EmitSignal(nameof(any_button));
+    }
+
     public override void _Process(float delta)
     {
         if (in_intro == true && Input.IsActionJustPressed("any"))

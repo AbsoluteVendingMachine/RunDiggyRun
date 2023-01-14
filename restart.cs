@@ -7,18 +7,20 @@ public class restart : Label
     bool restarting;
     bool ingame;
     bool cooldown;
+    bool playerdead;
     public override void _Ready(){
         Text = "";
         ingame = false;
         restarting = false;
         cooldown = false;
+        playerdead = false;
     }
     public void _on_final_boss_killAll(){
         QueueFree();
     }
     public override void _PhysicsProcess(float delta){
         if (ingame == true){
-            if (Input.IsActionPressed("restart")){
+            if (GetNode<TouchScreenButton>("/root/game/mobile_controls/restart").IsPressed()){
                 restarting = true;
                 if (cooldown == false){
                     GD.Print("reaches here");
@@ -27,9 +29,19 @@ public class restart : Label
                     GetNode<Timer>("/root/game/game_scene/player/player_cam/hud/restart_house/restart/restart_timer").Start();
                 }
             }
-            else if (!Input.IsActionPressed("restart")){
+            else if (!GetNode<TouchScreenButton>("/root/game/mobile_controls/restart").IsPressed()){
                 restarting = false;
             }
+        }
+    }
+    public void _on_player_death(){
+        playerdead = true;
+    }
+    public void _on_restart_released(){
+        if (playerdead){
+            playerdead = false;
+            EmitSignal("restart_game");
+            cooldown = false;
         }
     }
     public void _on_death_screen_callRestart(){

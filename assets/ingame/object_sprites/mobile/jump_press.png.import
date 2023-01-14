@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/play_unpress.png-0b9c47d44bddebe51e1a504fd212d989.stex"
+path="res://.import/jump_press.png-f9c1f7229787c8ba0cb4b74f2bafcb00.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ingame/object_sprites/mobile/play_unpress.png"
-dest_files=[ "res://.import/play_unpress.png-0b9c47d44bddebe51e1a504fd212d989.stex" ]
+source_file="res://assets/ingame/object_sprites/mobile/jump_press.png"
+dest_files=[ "res://.import/jump_press.png-f9c1f7229787c8ba0cb4b74f2bafcb00.stex" ]
 
 [params]
 

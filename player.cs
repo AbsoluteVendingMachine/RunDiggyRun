@@ -32,6 +32,7 @@ public class player : KinematicBody2D
     [Signal] public delegate void getShotty();
     int fuel;
     public Vector2 player_direction;
+    Vector2 jump_thing;
     float lunge_velocity = 80;
     float x_velocity;
     float player_gravity = 8;
@@ -59,6 +60,86 @@ public class player : KinematicBody2D
     private ConfigFile config = new ConfigFile();
     int money;
     int lootType;
+    public void _on_jump_released(){
+        if (in_game_ && IsOnFloor()){
+            jump_thing.y = -5;
+            jump_thing = MoveAndSlide(jump_thing,Vector2.Up);
+            var _sfx = GetNode<AudioStreamPlayer>("/root/game/game_scene/player/sfx");
+            _sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/jump2.wav");
+            _sfx.Play();
+            player_direction.y =- jump_force;
+        }
+        else if (in_game_ && !IsOnFloor() && !in_lunge && !has_jetpack || in_game_ && !IsOnFloor() && !in_lunge && has_jetpack && in_boss_level){
+            var _sfx = GetNode<AudioStreamPlayer>("/root/game/game_scene/player/sfx");
+            _sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/lunge2.wav");
+            _sfx.Play();
+            in_lunge = true;
+            player_direction.y = -50;
+            var player_sprite = GetNode<Sprite>("/root/game/game_scene/player/player_anim");
+            if (player_sprite.FlipH == false)
+            {
+                lunge_velocity = 60;
+            }
+            else
+            {
+                lunge_velocity = -60;
+            } 
+        }
+    }
+    public void _on_attack_released(){
+        if (can_attack){
+            var _sfx = GetNode<AudioStreamPlayer>("/root/game/game_scene/player/sfx");
+            if (has_super == true){
+                 _sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/throw2.wav");
+                _sfx.Play();
+            }
+            else{
+                _sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/throw.wav");
+                _sfx.Play();
+            }
+            if (!hurt_cooldown == true)
+        {
+            EmitSignal(nameof(action));
+        }
+        can_attack = false;
+        }
+    }
+    public void _on_attack_up_released(){
+        if (can_attack){
+            var _sfx = GetNode<AudioStreamPlayer>("/root/game/game_scene/player/sfx");
+            if (has_super == true){
+                 _sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/throw2.wav");
+                _sfx.Play();
+            }
+            else{
+                _sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/throw.wav");
+                _sfx.Play();
+            }
+            if (!hurt_cooldown == true)
+        {
+            EmitSignal(nameof(action));
+        }
+        can_attack = false;
+        }
+    }
+    public void _on_attack_down_released(){
+        if (can_attack){
+            var _sfx = GetNode<AudioStreamPlayer>("/root/game/game_scene/player/sfx");
+            if (has_super == true){
+                 _sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/throw2.wav");
+                _sfx.Play();
+            }
+            else{
+                _sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/throw.wav");
+                _sfx.Play();
+            }
+            if (!hurt_cooldown == true)
+        {
+            EmitSignal(nameof(action));
+        }
+        can_attack = false;
+        }
+    }
     public void updateMoney(){
         //GD.Print("going through money");
         var coins = GetNode<Label>("/root/game/game_scene/player/player_cam/hud/coins");
@@ -703,6 +784,7 @@ public class player : KinematicBody2D
     public override void _PhysicsProcess(float delta)
     {   //GD.Print(CanChangeEnding);
         if (in_game_){
+            //GD.Print(player_direction.y);
             if (has_jetpack && has_super && !IsSecret){
                 IsSecret = true;
                 EmitSignal("ending5");
@@ -720,7 +802,7 @@ public class player : KinematicBody2D
         if (in_game_){
             updateMoney();
         }
-        if (in_game_ == true && has_jetpack == true && !in_boss_level && !IsOnFloor() && Input.IsActionPressed("jump") && can_jetpack == true)
+        if (in_game_ == true && has_jetpack == true && !in_boss_level && !IsOnFloor() && GetNode<TouchScreenButton>("/root/game/mobile_controls/jump").IsPressed() && can_jetpack == true)
         {
             if (fuel > 0){
                 var sfx = GetNode<AudioStreamPlayer>("/root/game/game_scene/player/sfx");
@@ -741,7 +823,7 @@ public class player : KinematicBody2D
                 EmitSignal("jetpack_over");
             }
         }
-        if (!IsOnFloor() && Input.IsActionJustPressed("jump")){
+        if (!IsOnFloor() && GetNode<TouchScreenButton>("/root/game/mobile_controls/jump").IsPressed()){
             can_jetpack = true;
         }
         if (IsOnFloor() && in_game_ == true && Input.IsActionJustPressed("fix_anim_bug")){
@@ -787,41 +869,6 @@ public class player : KinematicBody2D
         player_direction.x = x_velocity+lunge_velocity;
         if (in_game_ == true)
         {
-        if (Input.IsActionJustPressed("action") && can_attack == true)
-        {
-            var _sfx = GetNode<AudioStreamPlayer>("/root/game/game_scene/player/sfx");
-            if (has_super == true){
-                 _sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/throw2.wav");
-                _sfx.Play();
-            }
-            else{
-                _sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/throw.wav");
-                _sfx.Play();
-            }
-        //GD.Print("action going through");
-        if (!hurt_cooldown == true)
-        {
-            EmitSignal(nameof(action));
-        }
-        can_attack = false;
-        }
-        if (!IsOnFloor() && Input.IsActionJustPressed("jump") && in_lunge == false && has_jetpack == false || !IsOnFloor() && Input.IsActionJustPressed("jump") && in_lunge == false && has_jetpack == true && in_boss_level)
-        {
-            var _sfx = GetNode<AudioStreamPlayer>("/root/game/game_scene/player/sfx");
-            _sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/lunge2.wav");
-            _sfx.Play();
-            in_lunge = true;
-            player_direction.y = -50;
-            var player_sprite = GetNode<Sprite>("/root/game/game_scene/player/player_anim");
-            if (player_sprite.FlipH == false)
-            {
-                lunge_velocity = 60;
-            }
-            else
-            {
-                lunge_velocity = -60;
-            }
-        }
         if (in_lunge == true){
             var player_sprite = GetNode<Sprite>("/root/game/game_scene/player/player_anim");
             if (player_sprite.FlipH == false)
@@ -833,7 +880,9 @@ public class player : KinematicBody2D
                 lunge_velocity = -60;
             }
         }
-        player_direction.y += player_gravity;
+        if (!IsOnFloor()){
+            player_direction.y += player_gravity;
+        }
         if (player_direction.y > max_fallspeed)
         {
             player_direction.y = max_fallspeed;
@@ -845,13 +894,13 @@ public class player : KinematicBody2D
             lunge_velocity = 0;
             in_lunge = false;
             in_air = false;
-            if (!hurt_cooldown == true && !Input.IsActionPressed("left") && !Input.IsActionPressed("right") && can_attack == true)
+            if (!hurt_cooldown == true && !GetNode<TouchScreenButton>("/root/game/mobile_controls/left").IsPressed() && !GetNode<TouchScreenButton>("/root/game/mobile_controls/right").IsPressed() && can_attack == true)
             {
                 EmitSignal(nameof(idle));
             }
-            if (!Input.IsActionJustPressed("action"))
+            if (!GetNode<TouchScreenButton>("/root/game/mobile_controls/attack").IsPressed())
             {
-                 if (!hurt_cooldown == true && Input.IsActionPressed("left") || Input.IsActionPressed("right") && can_attack == true)
+                 if (!hurt_cooldown == true && GetNode<TouchScreenButton>("/root/game/mobile_controls/left").IsPressed() || GetNode<TouchScreenButton>("/root/game/mobile_controls/right").IsPressed() && can_attack == true)
             {
                 EmitSignal(nameof(walk));
             }
@@ -886,14 +935,7 @@ public class player : KinematicBody2D
         {
             player_direction.y = 20;
         }
-        if (IsOnFloor() && Input.IsActionJustPressed("jump"))
-        {
-            var _sfx = GetNode<AudioStreamPlayer>("/root/game/game_scene/player/sfx");
-            _sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/jump2.wav");
-            _sfx.Play();
-            player_direction.y =- jump_force;
-        }
-        if (Input.IsActionPressed("right"))
+        if (GetNode<TouchScreenButton>("/root/game/mobile_controls/right").IsPressed())
         {
             x_velocity = x_velocity+40;
             if (x_velocity > 80)
@@ -901,7 +943,7 @@ public class player : KinematicBody2D
                 x_velocity = 80;
             }
         }
-        else if (Input.IsActionPressed("left"))
+        else if (GetNode<TouchScreenButton>("/root/game/mobile_controls/left").IsPressed())
         {
             x_velocity = x_velocity-40;
             if (x_velocity < -80)
@@ -909,7 +951,7 @@ public class player : KinematicBody2D
                 x_velocity = -80;
             }
         }
-        else if (!Input.IsActionPressed("right") || !Input.IsActionPressed("left"))
+        else if (!GetNode<TouchScreenButton>("/root/game/mobile_controls/right").IsPressed() || !GetNode<TouchScreenButton>("/root/game/mobile_controls/left").IsPressed())
         {
             if (x_velocity > 19.9)
             {
@@ -920,7 +962,7 @@ public class player : KinematicBody2D
                 x_velocity = x_velocity+20;
             }
         }
-        if (IsOnFloor() && (Input.IsActionPressed("right")) && (Input.IsActionPressed("left")))
+        if (IsOnFloor() && GetNode<TouchScreenButton>("/root/game/mobile_controls/right").IsPressed() && GetNode<TouchScreenButton>("/root/game/mobile_controls/left").IsPressed())
         {
             x_velocity = 0;
         }

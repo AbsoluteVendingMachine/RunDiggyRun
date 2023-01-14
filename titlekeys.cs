@@ -17,7 +17,7 @@ private bool cangoback;
 
         Show();
         title_keynum = 0;
-        Text = "New Game< Settings Stats ";
+        Text = "New Game<";
         in_titlescreen = true;
         cangoback = false;
 
@@ -34,7 +34,7 @@ private bool cangoback;
         {
             title_keynum = 0;
             in_titlescreen = true;
-            Text = "New Game< Settings Stats ";
+            Text = "New Game<";
             Show();
             cangoback = false;
             GD.Print("reaches this code");
@@ -59,7 +59,7 @@ private bool cangoback;
 
     {
 
-    Text = "New Game< Settings Stats ";
+    Text = "New Game<";
 
     }
 
@@ -67,7 +67,7 @@ private bool cangoback;
 
     {
 
-    Text = "New Game  Settings< Stats ";
+    Text = "New Game<";
 
     }
 
@@ -75,7 +75,7 @@ private bool cangoback;
 
     {
 
-    Text = "New Game  Settings Stats< ";
+    Text = "New Game<";
 
     }
 
@@ -103,7 +103,7 @@ private bool cangoback;
 
     {
 
-    Text = "New Game< Settings Stats ";
+    Text = "New Game<";
 
     }
 
@@ -111,7 +111,7 @@ private bool cangoback;
 
     {
 
-    Text = "New Game  Settings< Stats ";
+    Text = "New Game<";
 
     }
 
@@ -119,7 +119,7 @@ private bool cangoback;
 
     {
 
-    Text = "New Game  Settings Stats< ";
+    Text = "New Game<";
 
     }
 

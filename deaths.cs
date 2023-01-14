@@ -12,7 +12,27 @@ public class deaths : Label
     {
         in_title = true;
         in_stats = false;
-        Hide();
+        if (debug == true)
+        {
+            cf.Load("res://stats.cfg");
+        }
+        else
+        {
+            cf.Load("user://stats.cfg");
+        }
+        deaths_cnt = (int) cf.GetValue("stats","deaths",0);
+        cf.Clear();
+        if (deaths_cnt < 99999)
+        {
+            Text = ("Deaths: "+deaths_cnt);
+        }
+        else
+        {
+            Text = ("Deaths: Too Many!");
+        }
+        in_title = false;
+        in_stats = true;
+        Show();
     }
 
     public void _on_input_singleton_titleback()

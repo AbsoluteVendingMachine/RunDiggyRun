@@ -413,3 +413,39 @@ func _on_final_boss_finalBossHit():
 	emit_signal("particle_hit")
 	$teleport_timer.start()
 	hide()
+
+func _on_attack_released():
+	if selected && !cooldown && exists && ingame:
+		var player_ = get_node("/root/game/game_scene/player")
+		var player_anim_ = get_node("/root/game/game_scene/player/player_anim")
+		$pickaxe_anim.play("anim")
+		$cooldown_timer.start()
+		position = player_.position
+		show()
+		if (player_anim_.flip_h):
+			movemode = 2
+		elif (!player_anim_.flip_h):
+			movemode = 1
+		cooldown = true
+	
+
+func _on_attack_up_released():
+	show()
+	if selected && !cooldown && exists && ingame:
+		movemode = 3
+		cooldown = true
+		var player_ = get_node("/root/game/game_scene/player")
+		$pickaxe_anim.play("anim")
+		$cooldown_timer.start()
+		position = player_.position
+
+
+func _on_attack_down_released():
+	show()
+	if selected && !cooldown && exists && ingame:
+		movemode = 4
+		cooldown = true
+		var player_ = get_node("/root/game/game_scene/player")
+		$pickaxe_anim.play("anim")
+		$cooldown_timer.start()
+		position = player_.position

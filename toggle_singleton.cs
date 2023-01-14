@@ -43,6 +43,21 @@ public class toggle_singleton : Node
         }
 
     }
+    public void _on_toggle_released(){
+        if (inGame){
+            var sfx = GetNode<AudioStreamPlayer>("/root/game/game_scene/toggle_singleton/sfx");
+            sfx.Stream = GD.Load<AudioStream>("res://assets/audio/sfx/toggle.wav");
+            sfx.Play();
+            if (item == 1){
+               item = 2;
+               EmitSignal("item2");
+            }
+            else{
+               item = 1;
+               EmitSignal("item1");
+            } 
+        }
+    }
     public void _on_final_boss_killAll(){
         QueueFree();
     }

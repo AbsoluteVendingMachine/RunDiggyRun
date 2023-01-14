@@ -15,6 +15,9 @@ public class death_screen : CanvasLayer
         deathScreenShow = false;
         Hide();
     }
+    public void _on_restart_restart_game(){
+        Hide();
+    }
     public void deathCause(){
         var Message = GetNode<Label>("/root/game/game_scene/player/player_cam/hud/death_screen/message");
         if (causeOfDeath == 1){

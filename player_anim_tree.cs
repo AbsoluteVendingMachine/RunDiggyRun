@@ -4,7 +4,17 @@ using System;
 public class player_anim_tree : AnimationTree
 { 
     int state;
+    int direction;
     bool ingame;
+    public void _on_attack_released(){
+        direction = 1;
+    }
+    public void _on_attack_up_released(){
+        direction = 2;
+    }
+    public void _on_attack_down_released(){
+        direction = 3;
+    }
     public void _on_debug_timer_timeout()
     {
     //GD.Print(state);
@@ -83,18 +93,18 @@ public class player_anim_tree : AnimationTree
         }
         if (state == 4)
         {
-            if ((!Input.IsActionPressed("up")) && !Input.IsActionPressed("down"))
+            if (direction == 1 )
             {
     
                 Set("parameters/swing2/current",0);
                 Set("parameters/end_state/current",4);
             }
-            if (Input.IsActionPressed("down"))
+            if (direction == 3)
             {
                 Set("parameters/swing2/current",2);
                 Set("parameters/end_state/current",4);
             }
-            if (Input.IsActionPressed("up"))
+            if (direction == 2)
             {
                 Set("parameters/swing2/current",1);
                 Set("parameters/end_state/current",4);

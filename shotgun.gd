@@ -98,3 +98,52 @@ func _on_player_getShotty():
 	cooldown = false
 func _on_final_boss_killAll():
 	queue_free()
+func _on_attack_released():
+	if selected && inGame && exists && !cooldown:
+		var player_ = get_node("/root/game/game_scene/player")
+		var player_anim_ = get_node("/root/game/game_scene/player/player_anim")
+		$sfx.stream = load("res://assets/audio/sfx/shotgun.wav")
+		$sfx.play()
+		$shotgun_weapon/particles.play("anim")
+		$cooldown_timer.start()
+		position = player_.position
+		if player_anim_.flip_h == true:
+			rotation = deg2rad(180)
+			$shotgun_weapon/particles.play("anim")
+			show()
+			$shotgun_weapon/collider/shape.disabled = false
+			cooldown = true
+		else:
+			rotation = deg2rad(0)
+			$shotgun_weapon/particles.play("anim")
+			show()
+			$shotgun_weapon/collider/shape.disabled = false
+			cooldown = true
+	
+func _on_attack_up_released():
+	if selected && inGame && exists && !cooldown:
+		var player_ = get_node("/root/game/game_scene/player")
+		$sfx.stream = load("res://assets/audio/sfx/shotgun.wav")
+		$sfx.play()
+		$shotgun_weapon/particles.play("anim")
+		$cooldown_timer.start()
+		position = player_.position
+		rotation = deg2rad(270)
+		$shotgun_weapon/particles.play("anim")
+		show()
+		$shotgun_weapon/collider/shape.disabled = false
+		cooldown = true
+func _on_attack_down_released():
+	if selected && inGame && exists && !cooldown:
+		var player_ = get_node("/root/game/game_scene/player")
+		$sfx.stream = load("res://assets/audio/sfx/shotgun.wav")
+		$sfx.play()
+		$shotgun_weapon/particles.play("anim")
+		$cooldown_timer.start()
+		position = player_.position
+		emit_signal("knockbackUp")
+		rotation = deg2rad(90)
+		$shotgun_weapon/particles.play("anim")
+		show()
+		$shotgun_weapon/collider/shape.disabled = false
+		cooldown = true

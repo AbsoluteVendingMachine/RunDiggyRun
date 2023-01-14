@@ -86,4 +86,22 @@ public override void _PhysicsProcess(float delta){
         config_.Clear();
     }
     }
+    public void _on_camera_released(){
+        if (localCamera == 1){
+            localCamera = 0;
+            GetNode<Camera2D>("/root/game/game_scene/player/player_cam").SmoothingEnabled = false;
+            GetNode<AnimatedSprite>("/root/game/game_scene/player/player_cam/extra_hud/camera").Show();
+            GetNode<AnimatedSprite>("/root/game/game_scene/player/player_cam/extra_hud/camera").Play("snap");
+        }
+        else{
+            localCamera = 1;
+            GetNode<Camera2D>("/root/game/game_scene/player/player_cam").SmoothingEnabled = true;
+            GetNode<AnimatedSprite>("/root/game/game_scene/player/player_cam/extra_hud/camera").Show();
+            GetNode<AnimatedSprite>("/root/game/game_scene/player/player_cam/extra_hud/camera").Play("smooth");
+        }
+        config_.Load("res://extra.cfg");
+        config_.SetValue("extra","camera",localCamera);
+        config_.Save("res://extra.cfg");
+        config_.Clear();
+    }
 }
