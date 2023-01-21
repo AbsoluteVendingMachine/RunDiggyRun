@@ -27,7 +27,7 @@ Go to releases and select the latest archive according to your operating system,
 
 ### Setup
 
-- Download the mono version of [Godot Game Engine](https://godotengine.org/download) 3.5 (below 4.0 and not Android)
+- Download the mono version of [Godot Game Engine](https://godotengine.org/download) 3.5 (or a version below 4.0 and that's not for Android)
 - Download and install dependencies listed on download page if you haven't already
 - Download [.NET Core 3.1 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/3.1) and install it if you haven't already
 - Download the Run Diggy, Run! source code
