@@ -1,3 +1,8 @@
+# Project specific ignores (Suggested by Antimundo)
+stats.cfg
+settings.cfg
+controls.cfg
+extra.cfg
 
 # Godot-specific ignores
 .import/
